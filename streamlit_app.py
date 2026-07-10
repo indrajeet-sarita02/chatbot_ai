@@ -151,7 +151,7 @@ if query:
             "escalated": result.escalation_needed
         })
 
-    st.experimental_rerun()
+    st.rerun()
 
 st.markdown("---")
 st.caption("Powered by LangChain + OpenAI • Data stored in SQLite")
