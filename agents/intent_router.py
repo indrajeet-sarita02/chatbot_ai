@@ -1,4 +1,5 @@
-from langchain import Prompt, OpenAI
+from langchain_openai import OpenAI
+from langchain_core.prompts import PromptTemplate
 from utils.config import OPENAI_API_KEY
 import json, re
 
@@ -45,16 +46,16 @@ Respond ONLY with a JSON object:
 def classify_intent(user_message, context):
     try:
         llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
-        prompt = Prompt(
+        prompt = PromptTemplate(
             template=INTENT_PROMPT_TEMPLATE,
             input_variables=["message", "conversation_history", "intents"]
         )
-        result = llm(prompt.format(
+        result = llm.invoke(prompt.format(
             message=user_message,
             conversation_history=context.get("history", ""),
             intents=", ".join(INTENTS)
         ))
-        parsed = json.loads(result.strip())
+        parsed = json.loads(result.content.strip())
         intent = parsed.get("intent", "unknown")
         confidence = float(parsed.get("confidence", 0.0))
         entities = parsed.get("entities", {})
