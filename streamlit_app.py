@@ -256,6 +256,30 @@ st.markdown("""
 .footer-send button p { margin: 0 !important; font-size: 20px !important; }
 .footer-send button svg, .footer-send button img { display: none !important; }
 
+/* Remove right-side space */
+.stApp .main .block-container {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Make form inline with no padding */
+.stForm {
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+.stForm [data-testid="stForm"] {
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+.stForm [data-testid="column"] {
+    padding: 0 !important;
+}
+
 /* Hide Streamlit branding */
 #MainMenu { visibility: hidden; }
 footer { display: none !important; }
@@ -303,7 +327,6 @@ st.markdown(build_chat_html(), unsafe_allow_html=True)
 st.markdown('<div class="footer">', unsafe_allow_html=True)
 st.markdown('<div class="footer-icon">☰</div>', unsafe_allow_html=True)
 st.markdown('<div class="footer-icon">📷</div>', unsafe_allow_html=True)
-st.markdown('<div class="footer-icon">🖼️</div>', unsafe_allow_html=True)
 st.markdown('<div class="footer-input">', unsafe_allow_html=True)
 
 with st.form(key="chat_form", clear_on_submit=True):
