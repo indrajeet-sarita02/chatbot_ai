@@ -74,7 +74,7 @@ st.markdown("""
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    height: 75vh;
+    height: 90vh;
     background: #fff;
     border-radius: 16px;
     overflow: hidden;
@@ -98,7 +98,7 @@ st.markdown("""
 .chat-area {
     flex: 1;
     overflow-y: auto;
-    padding: 20px;
+    padding: 10px 20px;
     background: #f5f0eb;
 }
 
@@ -180,16 +180,26 @@ st.markdown("""
 /* Remove default Streamlit spacing */
 .stApp .main .block-container {
     max-width: 100% !important;
-    padding: 1rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
 }
 
 .stForm { border: none !important; padding: 0 !important; background: transparent !important; }
 .stForm [data-testid="stForm"] { border: none !important; padding: 0 !important; background: transparent !important; }
 .stForm [data-testid="column"] { padding: 0 !important; }
-#MainMenu { visibility: hidden; }
+#MainMenu { display: none !important; }
 footer { display: none !important; }
 .stApp > header { display: none !important; }
 .stAppDeployButton { display: none !important; }
+section[data-testid="stSidebar"] + section { padding-top: 0 !important; }
+.stMainBlockContainer { padding-top: 0 !important; }
+.appview-container .main .block-container { padding-top: 0 !important; padding-bottom: 0 !important; }
+header[data-testid="stHeader"] { display: none !important; }
+div[data-testid="stToolbar"] { display: none !important; }
+div[data-testid="stDecoration"] { display: none !important; }
+div[data-testid="stStatusWidget"] { display: none !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -261,15 +271,5 @@ if query:
     response = result.response or "I'm sorry, I couldn't process that."
 
     st.session_state.messages.append({"role": "assistant", "content": response})
-
-    with st.expander("🔍 Debug Info"):
-        st.json({
-            "intent": result.intent,
-            "confidence": result.confidence,
-            "entities": result.entities,
-            "user_id": st.session_state.user_id,
-            "session_id": st.session_state.session_id,
-            "escalated": result.escalation_needed
-        })
 
     st.rerun()
