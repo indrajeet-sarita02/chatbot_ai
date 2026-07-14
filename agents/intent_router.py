@@ -1,7 +1,6 @@
-from langchain_openai import ChatOpenAI
+from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
-from langchain_core.messages import HumanMessage
-from utils.config import LLM_API_KEY, LLM_BASE_URL, LLM_MODEL
+from utils.config import OPENAI_API_KEY
 import json, re
 
 INTENTS = [
@@ -46,22 +45,16 @@ Respond ONLY with a JSON object:
 
 def classify_intent(user_message, context):
     try:
-        llm = ChatOpenAI(
-            model=LLM_MODEL,
-            temperature=0,
-            openai_api_key=LLM_API_KEY,
-            openai_api_base=LLM_BASE_URL,
-        )
+        llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
         prompt = PromptTemplate(
             template=INTENT_PROMPT_TEMPLATE,
             input_variables=["message", "conversation_history", "intents"]
         )
-        formatted = prompt.format(
+        result = llm.invoke(prompt.format(
             message=user_message,
             conversation_history=context.get("history", ""),
             intents=", ".join(INTENTS)
-        )
-        result = llm.invoke([HumanMessage(content=formatted)])
+        ))
         parsed = json.loads(result.content.strip())
         intent = parsed.get("intent", "unknown")
         confidence = float(parsed.get("confidence", 0.0))
