@@ -17,7 +17,7 @@ def handle_order_query(user_id: str, entities: dict, intent: str) -> str:
         ).fetchall()
         if not rows:
             return "You have no orders yet."
-        return "Here are your orders:\n\n" + "\n---\n".join(_format_order(r) for r in rows)
+        return "📋 Here are your orders:\n\n" + "\n\n".join(_format_order(r) for r in rows)
 
     elif intent == "order_tracking":
         if not order_id:
@@ -79,10 +79,10 @@ def handle_order_query(user_id: str, entities: dict, intent: str) -> str:
 def _format_order(row) -> str:
     return (
         f"📦 Order #{row['order_id']}\n"
-        f"Status: {row['status'].title()}\n"
-        f"Payment: {row['payment_status'].title()}\n"
-        f"Amount: ₹{row['final_amount']:.2f}\n"
-        f"Delivery: {row['estimated_delivery'] or 'N/A'}\n"
-        f"Courier: {row['courier'] or 'Yet to be assigned'}\n"
-        f"Tracking: {row['tracking_number'] or 'N/A'}"
+        f"• Status: {row['status'].title()}\n"
+        f"• Payment: {row['payment_status'].title()}\n"
+        f"• Amount: ₹{row['final_amount']:.2f}\n"
+        f"• Delivery: {row['estimated_delivery'] or 'N/A'}\n"
+        f"• Courier: {row['courier'] or 'Yet to be assigned'}\n"
+        f"• Tracking: {row['tracking_number'] or 'N/A'}"
     )
