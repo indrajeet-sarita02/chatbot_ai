@@ -64,182 +64,53 @@ with st.sidebar:
         st.session_state.messages = []
         st.session_state.session_id = str(uuid.uuid4())[:8]
 
+st.title("🛍️ ShopEase AI Assistant")
+st.caption("Your 24/7 ecommerce support chatbot — Orders, Products, Weather & more")
+
 st.markdown("""
 <style>
-* { font-family: 'Inter', sans-serif; box-sizing: border-box; }
-
-.chat-wrapper {
-    max-width: 700px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    height: 85vh;
-    background: #fff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,.08);
+.chat-user {
+    background-color: #e3f2fd;
+    padding: 10px 15px;
+    border-radius: 15px 15px 5px 15px;
+    margin: 5px 0;
+    max-width: 80%;
+    margin-left: auto;
 }
-
-.chat-header {
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #075E54;
-    color: #fff;
+.chat-assistant {
+    background-color: #f5f5f5;
+    padding: 10px 15px;
+    border-radius: 15px 15px 15px 5px;
+    margin: 5px 0;
+    max-width: 80%;
+    margin-right: auto;
+    white-space: pre-wrap;
+    font-family: monospace;
 }
-
-.chat-header h2 {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0;
-}
-
-.chat-area {
-    flex: 1;
+.chat-container {
+    max-height: 500px;
     overflow-y: auto;
-    padding: 20px;
-    background: #f5f0eb;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
-
-.message {
-    display: flex;
-    margin-bottom: 16px;
-}
-
-.left-msg { justify-content: flex-start; }
-.right-msg { justify-content: flex-end; }
-
-.bubble {
-    max-width: 75%;
-    padding: 12px 16px;
-    border-radius: 16px;
-    font-size: 15px;
-    line-height: 1.5;
-    word-wrap: break-word;
-}
-
-.bot-bubble {
-    background: #fff;
-    color: #303030;
-    border-radius: 16px 16px 16px 4px;
-    box-shadow: 0 1px 2px rgba(0,0,0,.08);
-}
-
-.user-bubble {
-    background: #DCF8C6;
-    color: #303030;
-    border-radius: 16px 16px 4px 16px;
-}
-
-.chat-footer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 16px;
-    border-top: 1px solid #e0e0e0;
-    background: #f0f0f0;
-}
-
-.chat-footer .stForm {
-    flex: 1;
-    border: none !important;
-    padding: 0 !important;
-    background: transparent !important;
-}
-
-.chat-footer .stTextInput {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.chat-footer input {
-    border-radius: 24px !important;
-    border: none !important;
-    padding: 12px 18px !important;
-    font-size: 15px !important;
-    background: #fff !important;
-    outline: none !important;
-    box-shadow: none !important;
-    width: 100% !important;
-}
-
-.send-btn-wrap button {
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 50% !important;
-    background: #25D366 !important;
-    color: #fff !important;
-    border: none !important;
-    padding: 0 !important;
-    font-size: 20px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-width: unset !important;
-    cursor: pointer !important;
-}
-
-.send-btn-wrap button:hover { background: #1da851 !important; }
-
-.stApp .main .block-container {
-    max-width: 100% !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-}
-
-.stForm { border: none !important; padding: 0 !important; background: transparent !important; }
-.stForm [data-testid="stForm"] { border: none !important; padding: 0 !important; background: transparent !important; }
-.stForm [data-testid="column"] { padding: 0 !important; }
-#MainMenu { display: none !important; }
-footer { display: none !important; }
-.stApp > header { display: none !important; }
-.stAppDeployButton { display: none !important; }
-section[data-testid="stSidebar"] + section { padding-top: 0 !important; }
-.stMainBlockContainer { padding-top: 0 !important; }
-.appview-container .main .block-container { padding-top: 0 !important; padding-bottom: 0 !important; }
-header[data-testid="stHeader"] { display: none !important; }
-div[data-testid="stToolbar"] { display: none !important; }
-div[data-testid="stDecoration"] { display: none !important; }
-div[data-testid="stStatusWidget"] { display: none !important; }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="chat-wrapper">', unsafe_allow_html=True)
-st.markdown('<div class="chat-header"><h2>🛍️ ShopEase Assistant</h2><span>✓</span></div>', unsafe_allow_html=True)
-
-def build_chat_html():
-    html = '<div class="chat-area">'
-    for msg in st.session_state.messages:
-        if msg["role"] == "user":
-            html += '<div class="message right-msg"><div class="bubble user-bubble">' + msg["content"] + '</div></div>'
-        else:
-            html += '<div class="message left-msg"><div class="bubble bot-bubble">' + msg["content"] + '</div></div>'
-    html += '</div>'
-    return html
-
-st.markdown(build_chat_html(), unsafe_allow_html=True)
-
-st.markdown('<div class="chat-footer">', unsafe_allow_html=True)
+chat_html = '<div class="chat-container">'
+for msg in st.session_state.messages:
+    cls = "chat-user" if msg["role"] == "user" else "chat-assistant"
+    chat_html += f'<div class="{cls}">{msg["content"]}</div>'
+chat_html += '</div>'
+st.markdown(chat_html, unsafe_allow_html=True)
 
 with st.form(key="chat_form", clear_on_submit=True):
-    cols = st.columns([7, 1], gap="small")
-    with cols[0]:
-        prompt = st.text_input(
-            "Message",
-            key="chat_input",
-            label_visibility="collapsed",
-            placeholder="Type a message..."
-        )
-    with cols[1]:
-        st.markdown('<div class="send-btn-wrap">', unsafe_allow_html=True)
-        submitted = st.form_submit_button("➤", use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
+    prompt = st.text_input(
+        "Ask me anything about your orders, products, weather...",
+        key="chat_input"
+    )
+    submitted = st.form_submit_button("Send")
 
 query = None
 if submitted and prompt:
@@ -270,4 +141,17 @@ if query:
 
     st.session_state.messages.append({"role": "assistant", "content": response})
 
+    with st.expander("🔍 Debug Info"):
+        st.json({
+            "intent": result.intent,
+            "confidence": result.confidence,
+            "entities": result.entities,
+            "user_id": st.session_state.user_id,
+            "session_id": st.session_state.session_id,
+            "escalated": result.escalation_needed
+        })
+
     st.rerun()
+
+st.markdown("---")
+st.caption("Powered by LangChain + OpenAI • Data stored in SQLite")
