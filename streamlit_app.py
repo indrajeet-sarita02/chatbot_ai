@@ -96,6 +96,56 @@ st.markdown("""
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
+.chat-input-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.chat-input-wrapper .stTextInput {
+    flex: 1;
+}
+
+.chat-input-wrapper .stTextInput input {
+    border-radius: 25px !important;
+    border: 1px solid #e0e0e0 !important;
+    padding: 10px 16px !important;
+    background: #f2f2f2 !important;
+}
+
+.chat-input-wrapper .stFormSubmitButton {
+    flex-shrink: 0;
+}
+
+.chat-input-wrapper .stFormSubmitButton button {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background: #25D366 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: unset !important;
+}
+
+.chat-input-wrapper .stFormSubmitButton button:hover {
+    background: #1da851 !important;
+    color: #fff !important;
+}
+
+.chat-input-wrapper .stFormSubmitButton button:active {
+    background: #1a9a47 !important;
+}
+
+.chat-input-wrapper .stFormSubmitButton button p {
+    margin: 0 !important;
+    font-size: 20px !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -106,12 +156,18 @@ for msg in st.session_state.messages:
 chat_html += '</div>'
 st.markdown(chat_html, unsafe_allow_html=True)
 
+st.markdown('<div class="chat-input-wrapper">', unsafe_allow_html=True)
 with st.form(key="chat_form", clear_on_submit=True):
-    prompt = st.text_input(
-        "Ask me anything about your orders, products, weather...",
-        key="chat_input"
-    )
-    submitted = st.form_submit_button("Send")
+    cols = st.columns([6, 1])
+    with cols[0]:
+        prompt = st.text_input(
+            "Ask me anything about your orders, products, weather...",
+            key="chat_input",
+            label_visibility="collapsed"
+        )
+    with cols[1]:
+        submitted = st.form_submit_button("➤", use_container_width=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 query = None
 if submitted and prompt:
