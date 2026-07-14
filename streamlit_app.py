@@ -88,7 +88,7 @@ st.markdown("""
 
 /* Header */
 .header {
-    padding: 18px;
+    padding: 18px 12px 18px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -191,12 +191,6 @@ st.markdown("""
     background: #f0f0f0;
 }
 
-.footer-icon {
-    font-size: 24px;
-    color: #25D366;
-    cursor: pointer;
-}
-
 .footer-input {
     flex: 1;
 }
@@ -224,7 +218,7 @@ st.markdown("""
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #128C7E;
+    background: #25D366;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -235,13 +229,13 @@ st.markdown("""
     border: none;
 }
 
-.footer-send:hover { background: #0e6d62; }
+.footer-send:hover { background: #1da851; }
 
 .footer-send button {
     width: 44px !important;
     height: 44px !important;
     border-radius: 50% !important;
-    background: #128C7E !important;
+    background: #25D366 !important;
     color: #fff !important;
     border: none !important;
     padding: 0 !important;
@@ -252,7 +246,7 @@ st.markdown("""
     justify-content: center !important;
 }
 
-.footer-send button:hover { background: #0e6d62 !important; }
+.footer-send button:hover { background: #1da851 !important; }
 .footer-send button p { margin: 0 !important; font-size: 20px !important; }
 .footer-send button svg, .footer-send button img { display: none !important; }
 
@@ -261,6 +255,14 @@ st.markdown("""
     max-width: 100% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
+}
+
+.stApp .main .stAppDeployButton {
+    display: none !important;
+}
+
+header[data-testid="stHeader"] {
+    display: none !important;
 }
 
 /* Make form inline with no padding */
@@ -325,8 +327,6 @@ st.markdown(build_chat_html(), unsafe_allow_html=True)
 
 # Footer with input
 st.markdown('<div class="footer">', unsafe_allow_html=True)
-st.markdown('<div class="footer-icon">☰</div>', unsafe_allow_html=True)
-st.markdown('<div class="footer-icon">📷</div>', unsafe_allow_html=True)
 st.markdown('<div class="footer-input">', unsafe_allow_html=True)
 
 with st.form(key="chat_form", clear_on_submit=True):
