@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Messenger Chat UI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:#e0e0e0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.phone{
+    width:420px;
+    height:900px;
+    background:#fff;
+    border-radius:40px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 20px 60px rgba(0,0,0,.18);
+}
+
+/* Header */
+
+.header{
+    padding:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#075E54;
+    border-bottom:1px solid #075E54;
+}
+
+.left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.back{
+    font-size:30px;
+    color:white;
+    cursor:pointer;
+}
+
+.avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:url("https://picsum.photos/100") center/cover;
+}
+
+.company{
+    font-size:20px;
+    font-weight:700;
+}
+
+.verify{
+    background:#25D366;
+    color:#fff;
+    width:54px;
+    height:40px;
+    border-radius:22px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+}
+
+/* Chat */
+
+.chat{
+    flex:1;
+    overflow:auto;
+    padding:18px;
+}
+
+.message{
+    display:flex;
+    margin-bottom:18px;
+}
+
+.left-msg{
+    justify-content:flex-start;
+}
+
+.right-msg{
+    justify-content:flex-end;
+}
+
+.bubble{
+    max-width:78%;
+    padding:18px;
+    border-radius:22px;
+    font-size:18px;
+    line-height:1.5;
+}
+
+.grey{
+    background:#FFFFFF;
+    border:1px solid #e0e0e0;
+}
+
+.blue{
+    background:#DCF8C6;
+    color:#303030;
+    border-radius:22px 22px 22px 5px;
+}
+
+.quick-btn{
+    margin-top:18px;
+    background:#DCF8C6;
+    border:1px solid #25D366;
+    border-radius:14px;
+    padding:15px;
+    text-align:center;
+    font-weight:600;
+    font-size:18px;
+}
+
+.small-avatar{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:url("https://picsum.photos/101") center/cover;
+    align-self:flex-end;
+    margin-right:10px;
+}
+
+/* Footer */
+
+.footer{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:16px;
+    border-top:1px solid #eee;
+}
+
+.icon{
+    font-size:26px;
+    color:#25D366;
+}
+
+.input{
+    flex:1;
+    background:#f2f2f2;
+    border-radius:25px;
+    padding:12px 18px;
+    color:#888;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.emoji{
+    font-size:24px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="phone">
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <div class="left">
+
+            <div class="back">&#10094;</div>
+
+            <div class="avatar"></div>
+
+            <div class="company" style="color:white;">
+                ACME INC.
+            </div>
+
+        </div>
+
+        <div class="verify">
+            ✓
+        </div>
+
+    </div>
+
+    <!-- Chat -->
+
+    <div class="chat">
+
+        <div class="message left-msg">
+            <div class="bubble grey">
+                Give me a promocode
+            </div>
+        </div>
+
+        <div class="message right-msg">
+            <div class="bubble blue">
+                Give me a promocode
+            </div>
+        </div>
+
+        <div class="message left-msg">
+
+            <div class="small-avatar"></div>
+
+            <div class="bubble grey">
+
+                <strong>Hey John🙂</strong>
+
+                <br><br>
+
+                We have a 10% promo code for new customers.
+
+                <br><br>
+
+                Would you like to get one now? 🛍️
+
+                <div class="quick-btn">
+                    Sure I do!
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="message right-msg">
+            <div class="bubble blue">
+                Sure I do!
+            </div>
+        </div>
+
+        <div class="message left-msg">
+
+            <div class="small-avatar"></div>
+
+            <div class="bubble grey">
+
+                <strong>Awesome! 😎</strong>
+
+                <br><br>
+
+                Please leave your email address then.
+
+            </div>
+
+        </div>
+
+        <div class="message right-msg">
+
+            <div class="bubble blue">
+                john@doe.com
+            </div>
+
+        </div>
+
+        <div class="message left-msg">
+
+            <div class="small-avatar"></div>
+
+            <div class="bubble grey">
+
+                Grab a 10% discount on your first order 🤩
+
+                <br><br>
+
+                Here is your coupon:
+
+                <strong>10OFF</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="footer">
+
+        <div class="icon">☰</div>
+
+        <div class="icon">📷</div>
+
+        <div class="icon">🖼️</div>
+
+        <div class="input">
+            Aa
+            <span class="emoji">😊</span>
+        </div>
+
+        <div class="icon">👍</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

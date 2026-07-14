@@ -70,7 +70,7 @@ st.caption("Your 24/7 ecommerce support chatbot — Orders, Products, Weather & 
 st.markdown("""
 <style>
 .chat-user {
-    background-color: #e3f2fd;
+    background-color: #DCF8C6;
     padding: 10px 15px;
     border-radius: 15px 15px 5px 15px;
     margin: 5px 0;
@@ -78,7 +78,8 @@ st.markdown("""
     margin-left: auto;
 }
 .chat-assistant {
-    background-color: #f5f5f5;
+    background-color: #FFFFFF;
+    border: 1px solid #e0e0e0;
     padding: 10px 15px;
     border-radius: 15px 15px 15px 5px;
     margin: 5px 0;
