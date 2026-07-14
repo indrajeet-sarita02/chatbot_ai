@@ -250,11 +250,22 @@ st.markdown("""
 .footer-send button p { margin: 0 !important; font-size: 20px !important; }
 .footer-send button svg, .footer-send button img { display: none !important; }
 
-/* Remove right-side space */
+/* Remove right-side and top space */
 .stApp .main .block-container {
     max-width: 100% !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
+    padding-top: 0 !important;
+}
+
+[data-testid="stMarkdownContainer"] {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.st-emotion-cache-6c7yup, .st-emotion-cache-yn44r9 {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
 }
 
 .stApp .main .stAppDeployButton {
